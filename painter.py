@@ -33,23 +33,27 @@ weights = config["num_commit_weights"]
 target_file = os.path.join(repo_dir, "testfile");
 num_commits = weighted_choice(weights)
 
-# subprocess.call(["git", "pull"])
-
+# open log and test file
 log = open(os.path.join(os.path.dirname(sys.argv[0]), "debug.log"), "a+")
 testfile = open(target_file, "a+")
 
+# make num_commits commits
 for i in range(0, num_commits):
     time = str(datetime.datetime.now())
     testfile.write(str(time) + "\r\n")
     testfile.flush()
 
-    commit_msg = "Dummy commit " + str(time)
+    commit_msg = "Dummy commit " + str(time) + " " + str(i + 1) + " of " + str(num_commits)
     subprocess.call(["git", "-C", repo_dir, "add", "."])    # add all changes
     subprocess.call(["git", "-C", repo_dir, "commit", "-m", commit_msg])    # create commit
 
+# close outputs
 testfile.close()
 log.write(str(datetime.datetime.now()) + " - " + str(num_commits) + " commits made\r\n")
 log.close()
 
+# git -C repo_dir push origin master
 subprocess.call(["git", "-C", repo_dir, "push", "origin", "master"])
+
+
 sys.exit(0)
