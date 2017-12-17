@@ -24,7 +24,10 @@ def weighted_choice(weights):
             return i
 
 # load configuration
-config_file = "config.json"     # default config
+config_file = os.path.join(sys.argv[0], "config.json")     # default config absolute path
+print(config_file)
+sys.exit()
+
 config = json.load(open(config_file))
 repo_dir = config["repo_dir"];
 weights = config["num_commit_weights"]
