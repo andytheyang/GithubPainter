@@ -17,6 +17,13 @@ fi
 
 repodir="$( jq -r '.repositorydir' "$config_file" )"
 factor="$( jq -r '.commitfactor' "$config_file" )"
+commit_array="$( jq -r '.commit_num_array' "$config_file" )"
+
+commit_num=${#commit_array[@]}
+echo $commit_num
+echo ${commit_array[0]}
+
+exit 0
 
 target=$repodir
 target+="/testfile"
