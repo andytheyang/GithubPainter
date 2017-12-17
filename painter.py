@@ -24,10 +24,7 @@ def weighted_choice(weights):
             return i
 
 # load configuration
-config_file = os.path.join(sys.argv[0], "config.json")     # default config absolute path
-print(config_file)
-sys.exit()
-
+config_file = os.path.join(os.path.dirname(sys.argv[0]), "config.json")     # default config absolute path
 config = json.load(open(config_file))
 repo_dir = config["repo_dir"];
 weights = config["num_commit_weights"]
@@ -38,7 +35,7 @@ num_commits = weighted_choice(weights)
 
 # subprocess.call(["git", "pull"])
 
-log = open("debug.log", "a+")
+log = open(os.path.join(os.path.dirname(sys.argv[0]), "debug.log"), "a+")
 testfile = open(target_file, "a+")
 
 for i in range(0, num_commits):
