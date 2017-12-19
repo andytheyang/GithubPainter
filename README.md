@@ -27,5 +27,9 @@ By default, `painter.py` accesses a configuration in `config.json` located in th
  3. Set `repo_dir` to the absolute path of the empty repo.
  4. Set `num_commit_weights` to the weight of each possible number of commits. In the example above, the chance of 1 commit is 1/7, 2 commits is 3/7, 3 commits is 2/7, 4 commits is 1/7.
  5. At this point, you can test your connection by running `./painter.py` (to use `config.json`) or `./painter.py newconfig.json` to specify a custom configuration to use
- 6. Run `crontab -e` to edit your cron configuration, and add the following line:  `5 0 * * * /home/user/GithubPainter/painter.py` at the end, replacing the path with the absolute path to your `painter.py` command tested in step 5.
+ 6. Run `crontab -e` to edit your cron configuration, and add the following line: 
+    ```apache
+    5 0 * * * /home/user/GithubPainter/painter.py
+    ```
+    at the end, replacing the path with the absolute path to your `painter.py` command tested in step 5.
  7. Now, whenever this machine is on at 12:05 AM every morning, it will attempt to make a random number of commits and push to your GitHub! Time to wait a couple months.
