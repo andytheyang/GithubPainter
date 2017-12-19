@@ -23,8 +23,18 @@ def weighted_choice(weights):
         if rnd < total:
             return i
 
+# default configuration
+config_file_path = "config.json"
+
+# check arguments for new configuration
+if len(sys.argv) > 2:
+    print("too many arguments")
+    sys.exit(1)
+elif len(sys.argv) == 2:
+    config_file_path = sys.argv[1];
+
 # load configuration
-config_file = os.path.join(os.path.dirname(sys.argv[0]), "config.json")     # default config absolute path
+config_file = os.path.join(os.path.dirname(sys.argv[0]), config_file_path)     # default config absolute path
 config = json.load(open(config_file))
 repo_dir = config["repo_dir"];
 weights = config["num_commit_weights"]
